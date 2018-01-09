@@ -15,5 +15,7 @@ public class Watershed {
 		ID = id;
 		name = n;
 		this.location_description = location_description;
+		latitude = lat;
+		this.longitude = longitude;
 	}
 }
