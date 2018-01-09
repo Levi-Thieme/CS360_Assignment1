@@ -17,5 +17,6 @@ public class Watershed {
 		this.location_description = location_description;
 		latitude = lat;
 		this.longitude = longitude;
+		updated.getTime();
 	}
 }
