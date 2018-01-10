@@ -1,0 +1,20 @@
+package models;
+
+
+/**
+ * The Database Class stores the Watershed Objects
+ * @author Levi Thieme
+ *
+ */
+public class Database {
+	private Watershed[][] entries;
+	private int rows;
+	private int columns;
+	private final String[] columnNames = {"ID",
+            "Name",
+            "Latitude",
+            "Longitude",
+            "Updated",
+            "Description"};
+	
+}

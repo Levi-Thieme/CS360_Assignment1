@@ -1,0 +1,47 @@
+package views;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.BorderLayout;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
+public class DatabaseView extends JFrame {
+	private JTable table;
+	
+	
+	public DatabaseView() {
+		setMinimumSize(new Dimension(1000, 800));
+		setPreferredSize(new Dimension(1000, 800));
+		
+		
+		String[] columnNames = {"ID",
+                "Name",
+                "Latitude",
+                "Longitude",
+                "Updated",
+                "Description"};
+		
+		Object[][] locations = {{"1", "Bob", "54.535", "43.523", "August", "A nice place"}};
+		
+		
+		DefaultTableModel tableModel = new DefaultTableModel(locations, columnNames);
+		
+		table = new JTable(tableModel);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		
+		
+		getContentPane().add(scrollPane);
+		
+		this.setVisible(true);
+		
+		tableModel.addRow(new Object[][]{{"2", "Joe", "54.535", "43.523", "August", "A nice place"}});
+	}
+
+}
