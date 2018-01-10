@@ -1,8 +1,5 @@
 package views;
 
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.swing.BrowserView;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -43,14 +40,7 @@ public class ApplicationFrame extends JFrame {
 		
 		
 		
-		Browser browser = new Browser();
-		BrowserView bView = new BrowserView(browser);
-		this.add(bView);
-		
-		
-		
-		
-		browser.loadURL("http://maps.google.com");
+	
 		
 		
 		

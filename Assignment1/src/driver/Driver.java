@@ -1,14 +1,27 @@
 package driver;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
 import controllers.TableController;
+import models.SiteMap;
 import views.ApplicationFrame;
 import views.DatabaseView;;
 
 public class Driver {
 	
-	
 	public static void main(String[] args) {
-		//TableController tbController = new TableController("No file");
-		ApplicationFrame frame = new ApplicationFrame();
+		final SiteMap map = new SiteMap();
+
+        JFrame frame = new JFrame("Markers");
+
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.add(map, BorderLayout.CENTER);
+        frame.setSize(700, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 	}
+	
 }
