@@ -5,13 +5,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import models.SiteMap;
+import views.ApplicationFrame;
+
 public class ApplicationController implements MouseListener, ActionListener{
 
+	ApplicationFrame appView;
+	SiteMap sm = new SiteMap();
+	
+	public ApplicationController() {
+		appView = new ApplicationFrame(sm);
+		
+		
+		appView.get
+	}
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		/*
 		 * Need to handle all of the ApplicationFrame's menuItems and buttons in this
 		 */
+		
 		
 	}
 
