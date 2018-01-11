@@ -1,0 +1,8 @@
+package driver;
+
+import views.DatabaseView;;
+
+public class Driver {
+	DatabaseView dbView = new DatabaseView();
+	
+}

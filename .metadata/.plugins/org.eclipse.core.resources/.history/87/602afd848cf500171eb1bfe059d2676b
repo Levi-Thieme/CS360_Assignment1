@@ -1,0 +1,9 @@
+package models;
+
+public class Database {
+	private Object[][] entries;
+	private int rows;
+	private int columns;
+	
+	
+}

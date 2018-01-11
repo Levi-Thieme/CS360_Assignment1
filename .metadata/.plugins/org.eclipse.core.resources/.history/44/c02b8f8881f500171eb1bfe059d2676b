@@ -1,0 +1,39 @@
+package views;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JTable;
+import java.awt.BorderLayout;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
+public class DatabaseView extends JFrame {
+	private JTable table;
+	
+	
+	public DatabaseView() {
+		setMinimumSize(new Dimension(1000, 800));
+		setPreferredSize(new Dimension(1000, 800));
+		
+		
+		String[] columnNames = {"ID",
+                "Name",
+                "Latitude",
+                "Longitude",
+                "Updated",
+                "Description"};
+		
+		table = new JTable(null, columnNames);
+		table.setAutoCreateRowSorter(true);
+		getContentPane().add(table, BorderLayout.EAST);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		
+		
+		
+		
+	}
+
+}

@@ -1,9 +1,7 @@
 package views;
 
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
@@ -39,6 +37,13 @@ public class ApplicationFrame extends JFrame {
 		JMenuItem mntmEditEntries = new JMenuItem("Edit Entries");
 		mntmEditEntries.setMnemonic(KeyEvent.VK_E);
 		menuBar.add(mntmEditEntries);
+		
+		
+		
+	
+		
+		
+		
 		this.setVisible(true);
 		
 		

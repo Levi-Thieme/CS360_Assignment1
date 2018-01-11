@@ -1,7 +1,111 @@
 package views;
 
 import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import models.Watershed;
+
+import java.awt.BorderLayout;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.awt.Component;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class DatabaseView extends JFrame {
+	private JTable table;
+	private JButton btnAddEntry;
+	private JButton btnRemoveEntry;
+	private JButton btnSave;
+	
+	
+	public DatabaseView(ArrayList<Watershed> entries, String[] columnNames) {
+		setMinimumSize(new Dimension(1000, 800));
+		setPreferredSize(new Dimension(1000, 800));
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		
+		
+		Object[][] locations = {{"1", "Bob", "54.535", "43.523", "August", "A nice place"}};
+		
+		
+		DefaultTableModel tableModel = new DefaultTableModel(locations, columnNames);
+		
+		table = new JTable(tableModel);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		
+		
+		getContentPane().add(scrollPane);
+		
+		
+		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(10, 80));
+		getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		btnAddEntry = new JButton("Add Entry");
+		btnAddEntry.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnAddEntry.setPreferredSize(new Dimension(140, 80));
+		panel.add(btnAddEntry);
+		
+		btnRemoveEntry = new JButton("Remove Entry");
+		btnRemoveEntry.setPreferredSize(new Dimension(140, 80));
+		panel.add(btnRemoveEntry);
+		
+		btnSave = new JButton("Save");
+		btnSave.setActionCommand("Save");
+		btnSave.setPreferredSize(new Dimension(140, 80));
+		panel.add(btnSave);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		mnFile.setMnemonic(KeyEvent.VK_F);
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setMnemonic(KeyEvent.VK_E);
+		mnFile.add(mntmExit);
+		
+		
+		this.setVisible(true);
+		
+	}
+
+	
+	/**
+	 * 
+	 * @return a reference to table
+	 */
+	public JTable getTable() {
+		return table;
+	}
+
+
+	public JButton getBtnAddEntry() {
+		return btnAddEntry;
+	}
+
+
+	public JButton getBtnRemoveEntry() {
+		return btnRemoveEntry;
+	}
+
+
+	public JButton getBtnSave() {
+		return btnSave;
+	}
+	
+	
 
 }
