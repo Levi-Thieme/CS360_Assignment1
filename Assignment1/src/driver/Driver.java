@@ -15,8 +15,9 @@ public class Driver {
 	public static void main(String[] args) {
 		final SiteMap map = new SiteMap();
 
-        ApplicationFrame frame = new ApplicationFrame();
+        ApplicationFrame frame = new ApplicationFrame(map);
 
+        
         
 	}
 	

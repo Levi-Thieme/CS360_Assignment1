@@ -1,6 +1,11 @@
 package views;
 
 import javax.swing.*;
+
+import com.teamdev.jxmaps.Map;
+
+import models.SiteMap;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -17,12 +22,13 @@ public class ApplicationFrame extends JFrame {
 	private JTextField textField_3;
 	
 	
-	public ApplicationFrame() {
+	public ApplicationFrame(SiteMap map) {
+		setPreferredSize(new Dimension(1000, 800));
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//this.setUndecorated(true);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setUndecorated(true);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -43,6 +49,10 @@ public class ApplicationFrame extends JFrame {
 		
 		JMenuItem mntmAddSite = new JMenuItem("Add Site");
 		mnEdit.add(mntmAddSite);
+		
+		
+		getContentPane().add(map, BorderLayout.CENTER);
+		
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(200, 10));
