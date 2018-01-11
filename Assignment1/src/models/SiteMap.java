@@ -3,9 +3,11 @@ package models;
 import com.teamdev.jxmaps.MapStatus;
 import com.teamdev.jxmaps.swing.MapView;
 import com.teamdev.jxmaps.Map;
+import com.teamdev.jxmaps.MapMouseEvent;
 import com.teamdev.jxmaps.MapOptions;
 import com.teamdev.jxmaps.MapTypeControlOptions;
 import com.teamdev.jxmaps.Marker;
+import com.teamdev.jxmaps.MouseEvent;
 import com.teamdev.jxmaps.MapReadyHandler;
 import com.teamdev.jxmaps.MapStatus;
 import com.teamdev.jxmaps.ControlPosition;
@@ -42,6 +44,15 @@ public class SiteMap extends MapView{
                     map.setZoom(8.0);
                     
                     Marker m1 = new Marker(map);
+                    
+                    m1.addEventListener("click", new MapMouseEvent() {
+                        @Override
+                        public void onEvent(MouseEvent mouseEvent) {
+                            // Removing marker from the map
+                            m1.remove();
+                        }
+                    });
+                    
                     m1.setPosition(new LatLng(41.21859, -85.0768));
                 }
             }
