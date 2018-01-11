@@ -15,13 +15,9 @@ public class Driver {
 	public static void main(String[] args) {
 		final SiteMap map = new SiteMap();
 
-        JFrame frame = new JFrame("Markers");
+        ApplicationFrame frame = new ApplicationFrame();
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.add(map, BorderLayout.CENTER);
-        frame.setSize(700, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        
 	}
 	
 }
