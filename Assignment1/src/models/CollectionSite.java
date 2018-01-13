@@ -2,7 +2,7 @@ package models;
 
 import java.util.Date;
 
-public class Watershed {
+public class CollectionSite {
 
 	private int ID;
 	private String name;
@@ -10,7 +10,7 @@ public class Watershed {
 	private double latitude, longitude;
 	Date updated = new Date();
 	
-	public Watershed(int id, String n, String location_description, double lat, double longitude) {
+	public CollectionSite(int id, String n, String location_description, double lat, double longitude) {
 		
 		ID = id;
 		name = n;

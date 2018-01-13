@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
+
 import models.SiteMap;
 import views.ApplicationFrame;
 
@@ -33,11 +35,28 @@ public class ApplicationController implements MouseListener, ActionListener{
 		if(arg0.getActionCommand().equals("Save")) { // Saves the state of the window, and the data currently showing
 			
 		}
-		if(arg0.getActionCommand().equals("Exit")) { //Closes Program, but prompts user to make sure they have saved
+		else if(arg0.getActionCommand().equals("Exit"))
+		{ //Closes Program, but prompts user to make sure they have saved
+
 			/*if( user hasn't saved before exiting){
 			*		{prompt user, asking them if they want to save}
 			*else {
+		
 			*/
+			String ObjButtons[] = {"Yes", "No"};
+			int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to exit?",
+					null, JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, ObjButtons,
+					ObjButtons[1]);
+			if(PromptResult==JOptionPane.YES_OPTION)
+			{
+				System.exit(0);
+			}
+
+
+			
+			
+			
+			
 			System.exit(0);
 			
 		}

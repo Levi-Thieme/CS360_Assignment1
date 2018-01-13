@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import models.Database;
-import models.Watershed;
+import models.CollectionSite;
 import views.DatabaseView;
 
 
