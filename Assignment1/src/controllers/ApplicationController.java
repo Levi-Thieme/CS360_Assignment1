@@ -17,7 +17,8 @@ public class ApplicationController implements MouseListener, ActionListener{
 		appView = new ApplicationFrame(sm);
 		
 		
-		appView.get
+	
+		appView.getMntmAddSite().addActionListener(this);
 	}
 	
 	
@@ -26,8 +27,21 @@ public class ApplicationController implements MouseListener, ActionListener{
 		/*
 		 * Need to handle all of the ApplicationFrame's menuItems and buttons in this
 		 */
-		
-		
+		if(arg0.getActionCommand().equals("Save")) { // Saves the state of the window, and the data currently showing
+			
+			appView.getMntmSave().addActionListener(this);
+		}
+		else if(arg0.getActionCommand().equals("Exit")) { //Closes Program, but prompts user to make sure they have saved
+			/*if( user hasn't saved before exiting){
+			*		{prompt user, asking them if they want to save}
+			*else {
+			*/
+			System.exit(0);
+			appView.getMntmExit().addActionListener(this);
+		}
+		else if(arg0.getActionCommand().equals("Add Site")) {
+			
+		}
 	}
 
 	/**
