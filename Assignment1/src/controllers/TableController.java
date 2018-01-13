@@ -54,7 +54,7 @@ public class TableController implements ActionListener{
 			//Create an Add JFrame and get user input to initialize the WaterShed Object
 			
 			System.out.println("Adding a row!");
-			
+			   
 			
 			
 			
@@ -62,13 +62,27 @@ public class TableController implements ActionListener{
 			tableModel.addRow(new Object[db.getColumns()]);
 			
 		}
-		else if(e.getActionCommand().equals("Remove Entry")) {
+		else if(e.getActionCommand().equals("Remove Entry")) 
+		
+		{
+		DefaultTableModel tableModel2 = (DefaultTableModel)dbView.getTable().getModel();
+		System.out.println("Removing selected row!");
+		
+		tableModel2.removeRow(db.getColumns());
+		
+		throw new ArrayIndexOutOfBoundsException();
+			
+			
 			
 		}
-		else if(e.getActionCommand().equals("Edit")) {
+		else if(e.getActionCommand().equals("Edit"))
+		{
+			
 			
 		}
-		else if(e.getActionCommand().equals("Exit")) {
+		else if(e.getActionCommand().equals("Exit")) 
+		{
+			
 			//save and close the dbView (dbView.dispose);
 		}
 		

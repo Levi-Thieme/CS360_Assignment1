@@ -20,7 +20,9 @@ public class ApplicationFrame extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	
+	JMenuItem mntmSave;
+	JMenuItem mntmExit;
+	JMenuItem mntmAddSite;
 	
 	public ApplicationFrame(SiteMap map) {
 		setPreferredSize(new Dimension(1000, 800));
@@ -37,17 +39,17 @@ public class ApplicationFrame extends JFrame {
 		mnFile.setMnemonic(KeyEvent.VK_F);
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave = new JMenuItem("Save");
 		mnFile.add(mntmSave);
 		
-		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic(KeyEvent.VK_E);
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
 		
-		JMenuItem mntmAddSite = new JMenuItem("Add Site");
+		mntmAddSite = new JMenuItem("Add Site");
 		mnEdit.add(mntmAddSite);
 		
 		
@@ -145,5 +147,15 @@ public class ApplicationFrame extends JFrame {
 		
 		
 		
+	}
+	
+	public JMenuItem getMntmSave() {
+		return mntmSave;
+	}
+	public JMenuItem getMntmExit() {
+		return mntmExit;
+	}
+	public JMenuItem getMntmAddSite() {
+		return mntmAddSite;
 	}
 }
