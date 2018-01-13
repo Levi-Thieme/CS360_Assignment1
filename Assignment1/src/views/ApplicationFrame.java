@@ -27,7 +27,13 @@ public class ApplicationFrame extends JFrame {
 	public ApplicationFrame(SiteMap map) {
 		setPreferredSize(new Dimension(1000, 800));
 		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		//May want to set this to DO_NOTHING_ON_CLOSE so user doesn't accidentally close without saving
+//		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
+		
+		
 		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
