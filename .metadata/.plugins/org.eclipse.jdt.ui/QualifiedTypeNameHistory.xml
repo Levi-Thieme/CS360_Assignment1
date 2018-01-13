@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
-<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="views.DatabaseView"/>
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 <fullyQualifiedTypeName name="javax.swing.table.TableModel"/>
@@ -15,9 +14,14 @@
 <fullyQualifiedTypeName name="com.teamdev.jxmaps.LatLng"/>
 <fullyQualifiedTypeName name="com.teamdev.jxmaps.MapOptions"/>
 <fullyQualifiedTypeName name="com.teamdev.jxmaps.MapTypeControlOptions"/>
-<fullyQualifiedTypeName name="com.teamdev.jxmaps.MapMouseEvent"/>
-<fullyQualifiedTypeName name="com.teamdev.jxmaps.MouseEvent"/>
 <fullyQualifiedTypeName name="com.teamdev.jxmaps.ControlPosition"/>
 <fullyQualifiedTypeName name="com.teamdev.jxmaps.swing.MapView"/>
 <fullyQualifiedTypeName name="com.teamdev.jxmaps.MapStatus"/>
+<fullyQualifiedTypeName name="models.SiteMap"/>
+<fullyQualifiedTypeName name="com.teamdev.jxmaps.Marker"/>
+<fullyQualifiedTypeName name="com.teamdev.jxmaps.Map"/>
+<fullyQualifiedTypeName name="com.teamdev.jxmaps.MapMouseEvent"/>
+<fullyQualifiedTypeName name="com.teamdev.jxmaps.MouseEvent"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 </qualifiedTypeNameHistroy>

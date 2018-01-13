@@ -27,8 +27,8 @@ public class ApplicationFrame extends JFrame {
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		this.setUndecorated(true);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		//this.setUndecorated(true);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
