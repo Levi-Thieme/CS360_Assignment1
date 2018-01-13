@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  */
 public class Database {
-	private ArrayList<Watershed>[] entries;
+	private ArrayList<CollectionSite>[] entries;
 	
 	private int rows;
 	private static final String[] columnNames = {"ID",
@@ -20,7 +20,7 @@ public class Database {
 	private static final int columns = columnNames.length;
 	
 	
-	public ArrayList<Watershed>[] getEntries() {
+	public ArrayList<CollectionSite>[] getEntries() {
 		return entries;
 	}
 	public int getRows() {

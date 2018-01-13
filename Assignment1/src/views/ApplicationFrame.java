@@ -25,7 +25,7 @@ public class ApplicationFrame extends JFrame {
 	JMenuItem mntmAddSite;
 	
 	public ApplicationFrame(SiteMap map) {
-		setPreferredSize(new Dimension(1000, 800));
+		setSize(new Dimension(1000, 800));
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -52,9 +52,7 @@ public class ApplicationFrame extends JFrame {
 		mntmAddSite = new JMenuItem("Add Site");
 		mnEdit.add(mntmAddSite);
 		
-		
-		getContentPane().add(map, BorderLayout.CENTER);
-		
+				
 		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(200, 10));
@@ -137,9 +135,27 @@ public class ApplicationFrame extends JFrame {
 		textPane.setPreferredSize(new Dimension(200, 300));
 		panel_3.add(textPane);
 		
+		getContentPane().add(map, BorderLayout.CENTER);
+		
+		JPanel mapPane = new JPanel();
+		mapPane.setPreferredSize(new Dimension(770, 10));
 		
 		
-	
+		
+		JPanel map_panel = new JPanel();
+		map_panel.setLayout(new BorderLayout());
+		getContentPane().add(map_panel, BorderLayout.CENTER);
+		
+		map_panel.add(map, BorderLayout.CENTER);
+		
+		
+		map_panel.add(map);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setPreferredSize(new Dimension(10, 50));
+		map_panel.add(panel_4, BorderLayout.NORTH);
+		
+		
 		
 		
 		

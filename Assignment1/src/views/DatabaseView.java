@@ -6,7 +6,8 @@ import java.awt.Dimension;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import models.Watershed;
+import models.CollectionSite;
+import models.CollectionSite;
 
 import java.awt.BorderLayout;
 import javax.swing.JRadioButton;
@@ -27,7 +28,7 @@ public class DatabaseView extends JFrame {
 	private JButton btnSave;
 	
 	
-	public DatabaseView(ArrayList<Watershed> entries, String[] columnNames) {
+	public DatabaseView(ArrayList<CollectionSite> entries, String[] columnNames) {
 		setMinimumSize(new Dimension(1000, 800));
 		setPreferredSize(new Dimension(1000, 800));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
