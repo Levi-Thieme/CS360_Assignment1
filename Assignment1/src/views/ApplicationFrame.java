@@ -20,9 +20,11 @@ public class ApplicationFrame extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	JMenuItem mntmSave;
-	JMenuItem mntmExit;
-	JMenuItem mntmAddSite;
+	private JMenuItem mntmSave;
+	private JMenuItem mntmExit;
+	private JMenuItem mntmAddSite;
+	private JButton btnEdit;
+	private JButton btnDelete;
 	
 	public ApplicationFrame(SiteMap map) {
 		setPreferredSize(new Dimension(1000, 800));
@@ -65,11 +67,11 @@ public class ApplicationFrame extends JFrame {
 		panel_1.setPreferredSize(new Dimension(10, 75));
 		panel.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnEdit = new JButton("Edit");
+		btnEdit = new JButton("Edit");
 		btnEdit.setPreferredSize(new Dimension(80, 80));
 		panel_1.add(btnEdit);
 		
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
 		btnDelete.setPreferredSize(new Dimension(80, 80));
 		panel_1.add(btnDelete);
 		
@@ -91,6 +93,7 @@ public class ApplicationFrame extends JFrame {
 		textField = new JTextField();
 		panel_3.add(textField);
 		textField.setColumns(10);
+		textField.setEditable(false);
 		
 		JSeparator separator = new JSeparator();
 		separator.setPreferredSize(new Dimension(25, 2));
@@ -103,6 +106,7 @@ public class ApplicationFrame extends JFrame {
 		textField_1 = new JTextField();
 		panel_3.add(textField_1);
 		textField_1.setColumns(10);
+		textField_1.setEditable(false);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setPreferredSize(new Dimension(20, 2));
@@ -114,6 +118,7 @@ public class ApplicationFrame extends JFrame {
 		textField_2 = new JTextField();
 		panel_3.add(textField_2);
 		textField_2.setColumns(10);
+		textField_2.setEditable(false);
 		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setPreferredSize(new Dimension(30, 2));
@@ -125,6 +130,7 @@ public class ApplicationFrame extends JFrame {
 		textField_3 = new JTextField();
 		panel_3.add(textField_3);
 		textField_3.setColumns(10);
+		textField_3.setEditable(false);
 		
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setPreferredSize(new Dimension(40, 2));
@@ -157,5 +163,23 @@ public class ApplicationFrame extends JFrame {
 	}
 	public JMenuItem getMntmAddSite() {
 		return mntmAddSite;
+	}
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+	public JTextField getTextField() {
+		return textField;
+	}
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+	public JTextField getTextField_2() {
+		return textField_2;
+	}
+	public JTextField getTextField_3() {
+		return textField_3;
 	}
 }
