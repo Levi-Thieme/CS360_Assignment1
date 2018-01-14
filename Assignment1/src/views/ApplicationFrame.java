@@ -103,10 +103,6 @@ public class ApplicationFrame extends JFrame {
 		numberField.setColumns(10);
 		numberField.setEditable(false);
 		
-		JSeparator separator = new JSeparator();
-		separator.setPreferredSize(new Dimension(25, 2));
-		panel_3.add(separator);
-		
 		JLabel lblNewLabel = new JLabel("Longitude:");
 		lblNewLabel.setPreferredSize(new Dimension(60, 14));
 		panel_3.add(lblNewLabel);
@@ -116,10 +112,6 @@ public class ApplicationFrame extends JFrame {
 		longField.setColumns(10);
 		longField.setEditable(false);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setPreferredSize(new Dimension(20, 2));
-		panel_3.add(separator_1);
-		
 		JLabel lblLatitude = new JLabel("Latitude:");
 		panel_3.add(lblLatitude);
 		
@@ -128,10 +120,6 @@ public class ApplicationFrame extends JFrame {
 		latField.setColumns(10);
 		latField.setEditable(false);
 		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setPreferredSize(new Dimension(30, 2));
-		panel_3.add(separator_2);
-		
 		JLabel lblUpdated = new JLabel("Updated:");
 		panel_3.add(lblUpdated);
 		
@@ -139,10 +127,6 @@ public class ApplicationFrame extends JFrame {
 		panel_3.add(updatedField);
 		updatedField.setColumns(10);
 		updatedField.setEditable(false);
-		
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setPreferredSize(new Dimension(40, 2));
-		panel_3.add(separator_3);
 		
 		JLabel lblDescription = new JLabel("Description");
 		panel_3.add(lblDescription);

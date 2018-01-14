@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+import com.teamdev.jxmaps.MapMouseEvent;
 import com.teamdev.jxmaps.Marker;
 
 import models.CollectionSite;
@@ -31,6 +32,26 @@ public class ApplicationController implements MouseListener, ActionListener{
 		appView.getMntmSave().addActionListener(this);
 		appView.getBtnEdit().addActionListener(this);
 		appView.getBtnDelete().addActionListener(this);
+		/*sm.m1.addEventListener("click", new MapMouseEvent() {
+            @Override
+            public void onEvent(MouseEvent mouseEvent) {
+                // Closing initially created info window
+                infoWindow.close();
+                // Creating a new marker
+                final Marker marker = new Marker(map);
+                // Move marker to the position where user clicked
+                marker.setPosition(mouseEvent.latLng());
+
+                // Adding event listener that intercepts clicking on marker
+                marker.addEventListener("click", new MapMouseEvent() {
+                    @Override
+                    public void onEvent(MouseEvent mouseEvent) {
+                        // Removing marker from the map
+                        marker.remove();
+                    }
+                });
+            }
+		} */
 	}
 	
 	
@@ -95,6 +116,9 @@ public class ApplicationController implements MouseListener, ActionListener{
 	 */
 	private void displayInfo(Marker source) {
 		CollectionSite siteToDisplay = sites.getSite(source.getTitle());
+		
+		appView.getNameField().setText(source.getTitle());
+
 		
 		if(siteToDisplay == null)
 			return;

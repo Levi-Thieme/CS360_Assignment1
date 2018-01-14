@@ -17,6 +17,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SiteMap extends MapView{
+	public Marker m1;
 	
 	public SiteMap() {
 		// Setting of a ready handler to MapView object. onMapReady will be called when map initialization is done and
@@ -43,15 +44,8 @@ public class SiteMap extends MapView{
                     // Setting initial zoom value
                     map.setZoom(8.0);
                     
-                    Marker m1 = new Marker(map);
-                    
-                    m1.addEventListener("click", new MapMouseEvent() {
-                        @Override
-                        public void onEvent(MouseEvent mouseEvent) {
-                            // Removing marker from the map
-                            m1.remove();
-                        }
-                    });
+                    m1 = new Marker(map);
+                    m1.setTitle("Bob");
                     
                     m1.setPosition(new LatLng(41.21859, -85.0768));
                 }
