@@ -29,12 +29,13 @@ public class ApplicationFrame extends JFrame {
 	private JTextPane descriptionTextPane;
 	
 	public ApplicationFrame(SiteMap map) {
-		setSize(new Dimension(1000, 800));
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//this.setUndecorated(true);
+		
+		
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setUndecorated(true);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -44,6 +45,7 @@ public class ApplicationFrame extends JFrame {
 		menuBar.add(mnFile);
 		
 		mntmSave = new JMenuItem("Save");
+		mntmSave.setMnemonic(KeyEvent.VK_S);
 		mnFile.add(mntmSave);
 		
 		mntmExit = new JMenuItem("Exit");
@@ -51,9 +53,11 @@ public class ApplicationFrame extends JFrame {
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
+		mnEdit.setMnemonic(KeyEvent.VK_E);
 		menuBar.add(mnEdit);
 		
 		mntmAddSite = new JMenuItem("Add Site");
+		mntmAddSite.setMnemonic(KeyEvent.VK_A);
 		mnEdit.add(mntmAddSite);
 		
 				

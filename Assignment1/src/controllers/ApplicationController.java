@@ -59,9 +59,6 @@ public class ApplicationController implements MouseListener, ActionListener{
 				System.exit(0);
 			}
 
-
-			System.exit(0);
-			
 		}
 		if(arg0.getActionCommand().equals("Add Site")) {
 			
