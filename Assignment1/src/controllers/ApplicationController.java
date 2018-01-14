@@ -29,6 +29,8 @@ public class ApplicationController implements MouseListener, ActionListener{
 		appView.getMntmAddSite().addActionListener(this);
 		appView.getMntmExit().addActionListener(this);
 		appView.getMntmSave().addActionListener(this);
+		appView.getBtnEdit().addActionListener(this);
+		appView.getBtnDelete().addActionListener(this);
 	}
 	
 	
@@ -58,10 +60,6 @@ public class ApplicationController implements MouseListener, ActionListener{
 			}
 
 
-			
-			
-			
-			
 			System.exit(0);
 			
 		}
