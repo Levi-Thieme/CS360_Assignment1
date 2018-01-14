@@ -10,7 +10,14 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+<<<<<<< HEAD
 import models.CollectionSite;
+=======
+import com.teamdev.jxmaps.Marker;
+
+import models.CollectionSite;
+import models.Database;
+>>>>>>> branch 'master' of https://github.com/Levi-Thieme/CS360_Assignment1.git
 import models.SiteMap;
 import views.ApplicationFrame;
 
@@ -18,6 +25,7 @@ public class ApplicationController implements MouseListener, ActionListener{
 
 	ApplicationFrame appView;
 	SiteMap sm = new SiteMap();
+	Database sites;
 	
 	public ApplicationController() {
 		appView = new ApplicationFrame(sm);
@@ -25,6 +33,8 @@ public class ApplicationController implements MouseListener, ActionListener{
 		appView.getMntmAddSite().addActionListener(this);
 		appView.getMntmExit().addActionListener(this);
 		appView.getMntmSave().addActionListener(this);
+		appView.getBtnEdit().addActionListener(this);
+		appView.getBtnDelete().addActionListener(this);
 	}
 	
 	
@@ -54,10 +64,6 @@ public class ApplicationController implements MouseListener, ActionListener{
 			}
 
 
-			
-			
-			
-			
 			System.exit(0);
 			
 		}
@@ -72,10 +78,12 @@ public class ApplicationController implements MouseListener, ActionListener{
 			s2.getHistory();
 		}
 		if(arg0.getActionCommand().equals("Edit")) {
-			appView.getTextField().setEditable(true);
-			appView.getTextField_1().setEditable(true);
-			appView.getTextField_2().setEditable(true);
-			appView.getTextField_3().setEditable(true);
+			appView.getNameField().setEditable(true);
+			appView.getNumField().setEditable(true);
+			appView.getLongField().setEditable(true);
+			appView.getLatField().setEditable(true);
+			appView.getUpdatedField().setEditable(true);
+			appView.getDescriptionPane().setEditable(true);
 			
 		}
 	}
@@ -90,10 +98,33 @@ public class ApplicationController implements MouseListener, ActionListener{
 		 * If so, pass e.getSource to the displayInfo() method
 		 */
 		if(e.getSource() instanceof Marker) {
-			//displayInfo(e.getSource());
+			displayInfo((Marker) e.getSource());
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+
+	/**
+	 * Display the corresponding site's info to the info panel
+	 * @param source
+	 */
+	private void displayInfo(Marker source) {
+		CollectionSite siteToDisplay = sites.getSite(source.getTitle());
+		
+		if(siteToDisplay == null)
+			return;
+		
+		appView.getNameField().setText(siteToDisplay.getName());
+		appView.getNumField().setText(String.valueOf(siteToDisplay.getID()));
+		appView.getLongField().setText(String.valueOf(siteToDisplay.getLongitude()));
+		appView.getLatField().setText(String.valueOf(siteToDisplay.getLatitude()));
+		appView.getUpdatedField().setText(siteToDisplay.getUpdated().toString());
+		appView.getDescriptionPane().setText(siteToDisplay.getLocation_description());
+	}
+
+
+>>>>>>> branch 'master' of https://github.com/Levi-Thieme/CS360_Assignment1.git
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub

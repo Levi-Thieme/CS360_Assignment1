@@ -16,15 +16,17 @@ import java.awt.event.KeyEvent;
  *
  */
 public class ApplicationFrame extends JFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField numberField;
+	private JTextField longField;
+	private JTextField latField;
+	private JTextField updatedField;
 	private JMenuItem mntmSave;
 	private JMenuItem mntmExit;
 	private JMenuItem mntmAddSite;
 	private JButton btnEdit;
 	private JButton btnDelete;
+	private JTextField nameField;
+	private JTextPane descriptionTextPane;
 	
 	public ApplicationFrame(SiteMap map) {
 		setSize(new Dimension(1000, 800));
@@ -82,16 +84,20 @@ public class ApplicationFrame extends JFrame {
 		lblSiteName.setPreferredSize(new Dimension(100, 50));
 		panel_2.add(lblSiteName);
 		
+		nameField = new JTextField();
+		panel_2.add(nameField);
+		nameField.setColumns(10);
+		
 		JPanel panel_3 = new JPanel();
 		panel.add(panel_3, BorderLayout.CENTER);
 		
 		JLabel lblId = new JLabel("Number: ");
 		panel_3.add(lblId);
 		
-		textField = new JTextField();
-		panel_3.add(textField);
-		textField.setColumns(10);
-		textField.setEditable(false);
+		numberField = new JTextField();
+		panel_3.add(numberField);
+		numberField.setColumns(10);
+		numberField.setEditable(false);
 		
 		JSeparator separator = new JSeparator();
 		separator.setPreferredSize(new Dimension(25, 2));
@@ -101,10 +107,10 @@ public class ApplicationFrame extends JFrame {
 		lblNewLabel.setPreferredSize(new Dimension(60, 14));
 		panel_3.add(lblNewLabel);
 		
-		textField_1 = new JTextField();
-		panel_3.add(textField_1);
-		textField_1.setColumns(10);
-		textField_1.setEditable(false);
+		longField = new JTextField();
+		panel_3.add(longField);
+		longField.setColumns(10);
+		longField.setEditable(false);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setPreferredSize(new Dimension(20, 2));
@@ -113,10 +119,10 @@ public class ApplicationFrame extends JFrame {
 		JLabel lblLatitude = new JLabel("Latitude:");
 		panel_3.add(lblLatitude);
 		
-		textField_2 = new JTextField();
-		panel_3.add(textField_2);
-		textField_2.setColumns(10);
-		textField_2.setEditable(false);
+		latField = new JTextField();
+		panel_3.add(latField);
+		latField.setColumns(10);
+		latField.setEditable(false);
 		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setPreferredSize(new Dimension(30, 2));
@@ -125,10 +131,10 @@ public class ApplicationFrame extends JFrame {
 		JLabel lblUpdated = new JLabel("Updated:");
 		panel_3.add(lblUpdated);
 		
-		textField_3 = new JTextField();
-		panel_3.add(textField_3);
-		textField_3.setColumns(10);
-		textField_3.setEditable(false);
+		updatedField = new JTextField();
+		panel_3.add(updatedField);
+		updatedField.setColumns(10);
+		updatedField.setEditable(false);
 		
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setPreferredSize(new Dimension(40, 2));
@@ -137,9 +143,9 @@ public class ApplicationFrame extends JFrame {
 		JLabel lblDescription = new JLabel("Description");
 		panel_3.add(lblDescription);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setPreferredSize(new Dimension(200, 300));
-		panel_3.add(textPane);
+		descriptionTextPane = new JTextPane();
+		descriptionTextPane.setPreferredSize(new Dimension(200, 300));
+		panel_3.add(descriptionTextPane);
 		
 		getContentPane().add(map, BorderLayout.CENTER);
 		
@@ -186,17 +192,23 @@ public class ApplicationFrame extends JFrame {
 	public JButton getBtnDelete() {
 		return btnDelete;
 	}
-	public JTextField getTextField() {
-		return textField;
+	public JTextField getNameField() {
+		return nameField;
 	}
-	public JTextField getTextField_1() {
-		return textField_1;
+	public JTextField getNumField() {
+		return numberField;
 	}
-	public JTextField getTextField_2() {
-		return textField_2;
+	public JTextField getLongField() {
+		return longField;
 	}
-	public JTextField getTextField_3() {
-		return textField_3;
+	public JTextField getLatField() {
+		return latField;
+	}
+	public JTextField getUpdatedField() {
+		return updatedField;
+	}
+	public JTextPane getDescriptionPane() {
+		return descriptionTextPane;
 	}
 }
 

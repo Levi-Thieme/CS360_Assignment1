@@ -8,29 +8,29 @@ import java.util.ArrayList;
  *
  */
 public class Database {
-	private ArrayList<CollectionSite>[] entries;
+	private ArrayList<CollectionSite> entries;
 	
-	private int rows;
-	private static final String[] columnNames = {"ID",
-            "Name",
-            "Latitude",
-            "Longitude",
-            "Updated",
-            "Description"};
-	private static final int columns = columnNames.length;
+	public Database(ArrayList<CollectionSite> sites) {
+		entries = sites;
+	}
 	
-	
-	public ArrayList<CollectionSite>[] getEntries() {
+	public ArrayList<CollectionSite> getEntries() {
 		return entries;
 	}
-	public int getRows() {
-		return rows;
+	
+	public void setEntries(ArrayList<CollectionSite> entries) {
+		this.entries = entries;
 	}
-	public int getColumns() {
-		return columns;
+	
+	
+	public CollectionSite getSite(String name) {
+		for(int i = 0; i < entries.size(); i++) {
+			if(name.equals(entries.get(i)))
+				return entries.get(i);
+		}
+		return null;
 	}
-	public String[] getColumnNames() {
-		return columnNames;
-	}
+	
+	
 	
 }
