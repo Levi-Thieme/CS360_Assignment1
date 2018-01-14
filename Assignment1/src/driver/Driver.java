@@ -4,11 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-
-import controllers.TableController;
 import models.SiteMap;
 import views.ApplicationFrame;
-import views.DatabaseView;;
 
 public class Driver {
 	
