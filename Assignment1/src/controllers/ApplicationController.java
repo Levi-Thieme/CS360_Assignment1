@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+import models.CollectionSite;
 import models.SiteMap;
 import views.ApplicationFrame;
 
@@ -62,7 +63,13 @@ public class ApplicationController implements MouseListener, ActionListener{
 		}
 		if(arg0.getActionCommand().equals("Add Site")) {
 			
-			
+			CollectionSite s1 = new CollectionSite(0, null, null, 0, 0);
+			CollectionSite s2 = new CollectionSite(0, null, null, 0, 0);
+			s1.addDate(13, "January", 2018);
+			s2.addDate(14, "January", 2018);
+			s1.getHistory();
+			System.out.println("-----------------------");
+			s2.getHistory();
 		}
 		if(arg0.getActionCommand().equals("Edit")) {
 			appView.getTextField().setEditable(true);
@@ -86,7 +93,7 @@ public class ApplicationController implements MouseListener, ActionListener{
 			//displayInfo(e.getSource());
 		}
 	}
-
+	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
