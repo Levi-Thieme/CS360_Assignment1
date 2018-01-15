@@ -15,11 +15,17 @@ import com.teamdev.jxmaps.LatLng;
 import com.teamdev.jxmaps.swing.MapView;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SiteMap extends MapView{
-	public Marker m1;
+	private ArrayList<Marker> markers;
 	
-	public SiteMap() {
+	public SiteMap(ArrayList<CollectionSite> sites, DefaultListModel<Marker> listMarkers) {
+		
+		
+		markers = new ArrayList<Marker>();
+		
+		
 		// Setting of a ready handler to MapView object. onMapReady will be called when map initialization is done and
         // the map object is ready to use. Current implementation of onMapReady customizes the map object.
         setOnMapReadyHandler(new MapReadyHandler() {
@@ -44,14 +50,25 @@ public class SiteMap extends MapView{
                     // Setting initial zoom value
                     map.setZoom(8.0);
                     
-                    m1 = new Marker(map);
-                    m1.setTitle("Bob");
+                    for(int i = 0; i < sites.size(); i++) {
+                    	Marker siteMarker = new Marker(map);
+                    	
+                    	CollectionSite site = sites.get(i);
+                    	
+                    	siteMarker.setTitle(site.getName());
+                    	siteMarker.setPosition(new LatLng(site.getLatitude(), site.getLongitude()));
+                    	
+                    	listMarkers.addElement(siteMarker);
+                    }
                     
-                    m1.setPosition(new LatLng(41.21859, -85.0768));
+                    
                 }
             }
         });
     }
 	
 	
+	public ArrayList<Marker> getMarkers(){
+		return markers;
+	}
 }

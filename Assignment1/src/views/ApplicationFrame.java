@@ -3,7 +3,9 @@ package views;
 import javax.swing.*;
 
 import com.teamdev.jxmaps.Map;
+import com.teamdev.jxmaps.Marker;
 
+import models.CollectionSite;
 import models.SiteMap;
 
 import java.awt.*;
@@ -25,17 +27,20 @@ public class ApplicationFrame extends JFrame {
 	private JMenuItem mntmAddSite;
 	private JButton btnEdit;
 	private JButton btnDelete;
-	private JTextField nameField;
 	private JTextPane descriptionTextPane;
+	private DefaultListModel<Marker> siteListModel;
+	private JList<Marker> markerList;
+	private JTextField nameField;
 	
-	public ApplicationFrame(SiteMap map) {
+	public ApplicationFrame(SiteMap map, DefaultListModel<Marker> siteListModel) {
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		
-		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
+		
+		this.siteListModel = siteListModel;
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -79,21 +84,16 @@ public class ApplicationFrame extends JFrame {
 		btnDelete.setPreferredSize(new Dimension(80, 80));
 		panel_1.add(btnDelete);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setPreferredSize(new Dimension(10, 60));
-		panel.add(panel_2, BorderLayout.NORTH);
-		
-		JLabel lblSiteName = new JLabel("Site Name: ");
-		lblSiteName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSiteName.setPreferredSize(new Dimension(100, 50));
-		panel_2.add(lblSiteName);
-		
-		nameField = new JTextField();
-		panel_2.add(nameField);
-		nameField.setColumns(10);
-		
 		JPanel panel_3 = new JPanel();
 		panel.add(panel_3, BorderLayout.CENTER);
+		
+		JLabel lblName = new JLabel("Name:");
+		panel_3.add(lblName);
+		
+		nameField = new JTextField();
+		nameField.setEditable(false);
+		panel_3.add(nameField);
+		nameField.setColumns(10);
 		
 		JLabel lblId = new JLabel("Number: ");
 		panel_3.add(lblId);
@@ -135,6 +135,22 @@ public class ApplicationFrame extends JFrame {
 		descriptionTextPane.setPreferredSize(new Dimension(200, 300));
 		panel_3.add(descriptionTextPane);
 		
+		JPanel panel_5 = new JPanel();
+		panel_5.setPreferredSize(new Dimension(200, 150));
+		panel_3.add(panel_5);
+		
+		JLabel lblSites = new JLabel("Sites:");
+		panel_5.add(lblSites);
+		
+		
+		
+		markerList = new JList<>(siteListModel);
+		markerList.setPreferredSize(new Dimension(200, 100));
+		
+		markerList.setCellRenderer(new CollectionSiteRenderer());
+		panel_5.add(markerList);
+		markerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		getContentPane().add(map, BorderLayout.CENTER);
 		
 		JPanel mapPane = new JPanel();
@@ -156,14 +172,12 @@ public class ApplicationFrame extends JFrame {
 		map_panel.add(panel_4, BorderLayout.NORTH);
 		
 		
-		
-		
-		
-		this.setVisible(true);
-		
-		
-		
+		this.pack();
+		this.setVisible(true);	
 	}
+	
+	
+	
 	
 	public JMenuItem getMntmSave() {
 		return mntmSave;
@@ -197,6 +211,21 @@ public class ApplicationFrame extends JFrame {
 	}
 	public JTextPane getDescriptionPane() {
 		return descriptionTextPane;
+	}
+
+	public DefaultListModel<Marker> getSiteListModel() {
+		return siteListModel;
+	}
+
+	public void setSiteListModel(DefaultListModel<Marker> siteListModel) {
+		this.siteListModel = siteListModel;
+	}
+
+
+
+
+	public JList<Marker> getMarkerList() {
+		return markerList;
 	}
 }
 

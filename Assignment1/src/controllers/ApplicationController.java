@@ -7,10 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-
+import com.teamdev.jxmaps.LatLng;
+import com.teamdev.jxmaps.Map;
 import com.teamdev.jxmaps.MapMouseEvent;
 
 import models.CollectionSite;
@@ -22,41 +26,32 @@ import models.Database;
 import models.SiteMap;
 import views.ApplicationFrame;
 
-public class ApplicationController implements MouseListener, ActionListener{
+public class ApplicationController implements MouseListener, ActionListener, ListSelectionListener{
 
 	ApplicationFrame appView;
-	SiteMap sm = new SiteMap();
-	Database sites;
+	SiteMap sm;
+	Database siteDB;
+	DefaultListModel<Marker> siteListModel;
 	
-	public ApplicationController() {
-		appView = new ApplicationFrame(sm);
+	public ApplicationController(Database siteDB) {
+		
+		this.siteDB = siteDB;
+		ArrayList<CollectionSite> sites = siteDB.getEntries();
+		siteListModel = new DefaultListModel<Marker>();
+		
+		sm = new SiteMap(sites, siteListModel);
+
+ 		appView = new ApplicationFrame(sm, siteListModel);
 		
 		appView.getMntmAddSite().addActionListener(this);
 		appView.getMntmExit().addActionListener(this);
 		appView.getMntmSave().addActionListener(this);
 		appView.getBtnEdit().addActionListener(this);
 		appView.getBtnDelete().addActionListener(this);
-		/*sm.m1.addEventListener("click", new MapMouseEvent() {
-            @Override
-            public void onEvent(MouseEvent mouseEvent) {
-                // Closing initially created info window
-                infoWindow.close();
-                // Creating a new marker
-                final Marker marker = new Marker(map);
-                // Move marker to the position where user clicked
-                marker.setPosition(mouseEvent.latLng());
-
-                // Adding event listener that intercepts clicking on marker
-                marker.addEventListener("click", new MapMouseEvent() {
-                    @Override
-                    public void onEvent(MouseEvent mouseEvent) {
-                        // Removing marker from the map
-                        marker.remove();
-                    }
-                });
-            }
-		} */
+		
+		appView.getMarkerList().addListSelectionListener(this);
 	}
+	
 	
 	
 	@Override
@@ -87,13 +82,7 @@ public class ApplicationController implements MouseListener, ActionListener{
 		}
 		if(arg0.getActionCommand().equals("Add Site")) {
 			
-			CollectionSite s1 = new CollectionSite(0, null, null, 0, 0);
-			CollectionSite s2 = new CollectionSite(0, null, null, 0, 0);
-			s1.addDate(13, "January", 2018);
-			s2.addDate(14, "January", 2018);
-			s1.getHistory();
-			System.out.println("-----------------------");
-			s2.getHistory();
+			
 		}
 		if(arg0.getActionCommand().equals("Edit")) {
 			appView.getNameField().setEditable(true);
@@ -125,7 +114,7 @@ public class ApplicationController implements MouseListener, ActionListener{
 	 * @param source
 	 */
 	private void displayInfo(Marker source) {
-		CollectionSite siteToDisplay = sites.getSite(source.getTitle());
+		CollectionSite siteToDisplay = siteDB.getSite(source.getTitle());
 		
 		appView.getNameField().setText(source.getTitle());
 
@@ -164,6 +153,16 @@ public class ApplicationController implements MouseListener, ActionListener{
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		JList<Marker> list = (JList<Marker>) e.getSource();
+		Marker selectedMarker = list.getSelectedValue();
+		
+		displayInfo(selectedMarker);
 	}
 	
 	
