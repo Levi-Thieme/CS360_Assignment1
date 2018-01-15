@@ -11,14 +11,16 @@ import controllers.ApplicationController;
 import models.CollectionSite;
 import models.Database;
 import models.SiteMap;
+import utility.CVSReader;
 import utility.DataFileInitializer;
 import views.ApplicationFrame;
 
 public class Driver {
 	
 	public static void main(String[] args) throws IOException {
-		//DataFileInitializer.initializeSiteDataFile("entries");
 		Database siteDB = new Database("entries");
+		
+		siteDB.setEntries(CVSReader.readCollectionSites());
 			
 		ApplicationController controller = new ApplicationController(siteDB);
         

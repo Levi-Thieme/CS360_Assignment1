@@ -138,7 +138,7 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		CollectionSite changedSite = siteDB.getSiteByName(selectedMarker);
 		
 		changedSite.setName(appView.getNameField().getText());
-		changedSite.setID(Integer.parseInt(appView.getNumField().getText()));
+		changedSite.setID(appView.getNumField().getText());
 		changedSite.setLatitude(Double.parseDouble(appView.getLatField().getText()));
 		changedSite.setLongitude(Double.parseDouble(appView.getLongField().getText()));
 		changedSite.setUpdated(appView.getUpdatedField().getText());

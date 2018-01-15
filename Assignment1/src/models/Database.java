@@ -27,7 +27,7 @@ public class Database {
 		this.filename = filename;
 		entries = new ArrayList<CollectionSite>();
 		
-		load();
+		//load();
 	}
 	
 	
@@ -89,6 +89,10 @@ public class Database {
 	 */
 	public ArrayList<CollectionSite> getEntries() {
 		return entries;
+	}
+	
+	public void setEntries(ArrayList<CollectionSite> entries) {
+		this.entries = entries;
 	}
 	
 	

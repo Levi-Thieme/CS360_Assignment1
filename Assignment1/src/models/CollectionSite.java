@@ -61,8 +61,8 @@ public class CollectionSite implements Serializable{
 		return ID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(String iD) {
+		this.ID = ID;
 	}
 
 	public String getName() {
