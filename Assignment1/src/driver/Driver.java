@@ -17,7 +17,7 @@ import views.ApplicationFrame;
 public class Driver {
 	
 	public static void main(String[] args) throws IOException {
-		
+		//DataFileInitializer.initializeSiteDataFile("entries");
 		Database siteDB = new Database("entries");
 			
 		ApplicationController controller = new ApplicationController(siteDB);

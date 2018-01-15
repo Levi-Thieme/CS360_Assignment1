@@ -28,11 +28,11 @@ public class ApplicationFrame extends JFrame {
 	private JButton btnEdit;
 	private JButton btnDelete;
 	private JTextPane descriptionTextPane;
-	private DefaultListModel<Marker> siteListModel;
-	private JList<Marker> markerList;
 	private JTextField nameField;
+	private JList<String> markerList;
 	
-	public ApplicationFrame(SiteMap map, DefaultListModel<Marker> siteListModel) {
+	public ApplicationFrame(SiteMap map, DefaultListModel<String> listModel) {
+		getContentPane().setPreferredSize(new Dimension(1000, 800));
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -40,7 +40,6 @@ public class ApplicationFrame extends JFrame {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
 		
-		this.siteListModel = siteListModel;
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -72,6 +71,20 @@ public class ApplicationFrame extends JFrame {
 		getContentPane().add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
+		JPanel panel_2 = new JPanel();
+		panel_2.setPreferredSize(new Dimension(10, 180));
+		panel.add(panel_2, BorderLayout.NORTH);
+		
+		JLabel label = new JLabel("Sites");
+		panel_2.add(label);
+		
+		markerList = new JList<String>(listModel);
+		markerList.setPreferredSize(new Dimension(200, 200));
+		markerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		panel_2.add(markerList);
+		
+		
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setPreferredSize(new Dimension(10, 75));
 		panel.add(panel_1, BorderLayout.SOUTH);
@@ -85,6 +98,7 @@ public class ApplicationFrame extends JFrame {
 		panel_1.add(btnDelete);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setPreferredSize(new Dimension(10, 350));
 		panel.add(panel_3, BorderLayout.CENTER);
 		
 		JLabel lblName = new JLabel("Name:");
@@ -135,27 +149,12 @@ public class ApplicationFrame extends JFrame {
 		descriptionTextPane.setPreferredSize(new Dimension(200, 300));
 		panel_3.add(descriptionTextPane);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setPreferredSize(new Dimension(200, 150));
-		panel_3.add(panel_5);
 		
-		JLabel lblSites = new JLabel("Sites:");
-		panel_5.add(lblSites);
-		
-		
-		
-		markerList = new JList<>(siteListModel);
-		markerList.setPreferredSize(new Dimension(200, 100));
-		
-		markerList.setCellRenderer(new CollectionSiteRenderer());
-		panel_5.add(markerList);
-		markerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		getContentPane().add(map, BorderLayout.CENTER);
 		
 		JPanel mapPane = new JPanel();
 		mapPane.setPreferredSize(new Dimension(770, 10));
-		
 		
 		
 		JPanel map_panel = new JPanel();
@@ -213,18 +212,10 @@ public class ApplicationFrame extends JFrame {
 		return descriptionTextPane;
 	}
 
-	public DefaultListModel<Marker> getSiteListModel() {
-		return siteListModel;
-	}
-
-	public void setSiteListModel(DefaultListModel<Marker> siteListModel) {
-		this.siteListModel = siteListModel;
-	}
 
 
 
-
-	public JList<Marker> getMarkerList() {
+	public JList<String> getMarkerList() {
 		return markerList;
 	}
 }

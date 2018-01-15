@@ -20,11 +20,10 @@ import java.util.ArrayList;
 public class SiteMap extends MapView{
 	private ArrayList<Marker> markers;
 	
-	public SiteMap(ArrayList<CollectionSite> sites, DefaultListModel<Marker> listMarkers) {
-		
+	
+	public SiteMap(ArrayList<CollectionSite> sites) {
 		
 		markers = new ArrayList<Marker>();
-		
 		
 		// Setting of a ready handler to MapView object. onMapReady will be called when map initialization is done and
         // the map object is ready to use. Current implementation of onMapReady customizes the map object.
@@ -57,11 +56,7 @@ public class SiteMap extends MapView{
                     	
                     	siteMarker.setTitle(site.getName());
                     	siteMarker.setPosition(new LatLng(site.getLatitude(), site.getLongitude()));
-                    	
-                    	listMarkers.addElement(siteMarker);
-                    }
-                    
-                    
+                    }   
                 }
             }
         });
@@ -71,4 +66,6 @@ public class SiteMap extends MapView{
 	public ArrayList<Marker> getMarkers(){
 		return markers;
 	}
+	
+	
 }

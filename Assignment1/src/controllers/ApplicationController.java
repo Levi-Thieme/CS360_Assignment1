@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -26,22 +27,29 @@ import models.Database;
 import models.SiteMap;
 import views.ApplicationFrame;
 
-public class ApplicationController implements MouseListener, ActionListener, ListSelectionListener{
+public class ApplicationController implements ActionListener, ListSelectionListener{
 
 	ApplicationFrame appView;
 	SiteMap sm;
 	Database siteDB;
-	DefaultListModel<Marker> siteListModel;
+	DefaultListModel<String> siteListModel;
+	String selectedMarker;
+	boolean changesSaved = true;
 	
 	public ApplicationController(Database siteDB) {
 		
 		this.siteDB = siteDB;
 		ArrayList<CollectionSite> sites = siteDB.getEntries();
-		siteListModel = new DefaultListModel<Marker>();
+		siteListModel = new DefaultListModel<String>();
 		
-		sm = new SiteMap(sites, siteListModel);
-
+		for(int i = 0; i < sites.size(); i++)
+			siteListModel.addElement(sites.get(i).getName());
+		
+		sm = new SiteMap(sites);
+		
+		
  		appView = new ApplicationFrame(sm, siteListModel);
+
 		
 		appView.getMntmAddSite().addActionListener(this);
 		appView.getMntmExit().addActionListener(this);
@@ -61,22 +69,34 @@ public class ApplicationController implements MouseListener, ActionListener, Lis
 		 */
 		if(arg0.getActionCommand().equals("Save")) { // Saves the state of the window, and the data currently showing
 			
+			siteDB.save();
 		}
 		else if(arg0.getActionCommand().equals("Exit"))
 		{ //Closes Program, but prompts user to make sure they have saved
 
-			/*if( user hasn't saved before exiting){
-			*		{prompt user, asking them if they want to save}
-			*else {
-		
-			*/
+			
 			String ObjButtons[] = {"Yes", "No"};
-			int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to exit?",
-					null, JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, ObjButtons,
-					ObjButtons[1]);
-			if(PromptResult==JOptionPane.YES_OPTION)
-			{
-				System.exit(0);
+			int promptResult;
+			
+			if(!changesSaved) {
+				promptResult = JOptionPane.showOptionDialog(appView, "Changes have been made that are not saved. Would you like to exit without saving your changes?",
+						null, JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
+				
+				if(promptResult == JOptionPane.YES_OPTION) {
+					siteDB.save();
+					System.exit(0);
+				}	
+			}
+			else {
+			
+				promptResult = JOptionPane.showOptionDialog(appView, "Are you sure you want to exit?",
+						null, JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, ObjButtons,ObjButtons[1]);
+				
+				if(promptResult==JOptionPane.YES_OPTION)
+				{
+					siteDB.save();
+					System.exit(0);
+				}
 			}
 
 		}
@@ -92,31 +112,48 @@ public class ApplicationController implements MouseListener, ActionListener, Lis
 			appView.getUpdatedField().setEditable(true);
 			appView.getDescriptionPane().setEditable(true);
 			
+			//Convert "Edit" button to "Save Changes" button
+			JButton button = (JButton) arg0.getSource();
+			button.setText("Save Changes");
+			
+			changesSaved = false;
+		}
+		
+		if(arg0.getActionCommand().equals("Save Changes")) {
+			//Convert "Save Changes" button to "Edit" button
+			JButton editBtn = (JButton)arg0.getSource();
+			editBtn.setText("Edit");
+			
+			saveTextFieldChanges();
+			changesSaved = true;
 		}
 	}
-
+	
+	
 	/**
-	 * Handles marker clicks
+	 * Saves the changes to the TextFields to the selected object
 	 */
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		/*
-		 * Check if e.getSource() is an instanceof Marker
-		 * If so, pass e.getSource to the displayInfo() method
-		 */
-		if(e.getSource() instanceof Marker) {
-			displayInfo((Marker) e.getSource());
-		}
+	public void saveTextFieldChanges() {
+		//Getting the CollectionSite Object that corresponds to the selected Marker
+		CollectionSite changedSite = siteDB.getSiteByName(selectedMarker);
+		
+		changedSite.setName(appView.getNameField().getText());
+		changedSite.setID(Integer.parseInt(appView.getNumField().getText()));
+		changedSite.setLatitude(Double.parseDouble(appView.getLatField().getText()));
+		changedSite.setLongitude(Double.parseDouble(appView.getLongField().getText()));
+		changedSite.setUpdated(appView.getUpdatedField().getText());
+		changedSite.setLocation_description(appView.getDescriptionPane().getText());
 	}
 
+
 	/**
-	 * Display the corresponding site's info to the info panel
+	 * Display the corresponding site's info to the info panel and update map view
 	 * @param source
 	 */
-	private void displayInfo(Marker source) {
-		CollectionSite siteToDisplay = siteDB.getSite(source.getTitle());
+	private void displayInfo(String name) {
+		CollectionSite siteToDisplay = siteDB.getSiteByName(name);
 		
-		appView.getNameField().setText(source.getTitle());
+		appView.getNameField().setText(name);
 
 		
 		if(siteToDisplay == null)
@@ -125,44 +162,27 @@ public class ApplicationController implements MouseListener, ActionListener, Lis
 		appView.getNameField().setText(siteToDisplay.getName());
 		appView.getNumField().setText(String.valueOf(siteToDisplay.getID()));
 		appView.getLongField().setText(String.valueOf(siteToDisplay.getLongitude()));
-		appView.getLatField().setText(String.valueOf(siteToDisplay.getLatitude()));
+		appView.getLatField().setText(String.valueOf(siteToDisplay.getLatitude())); 
 		appView.getUpdatedField().setText(siteToDisplay.getUpdated().toString());
 		appView.getDescriptionPane().setText(siteToDisplay.getLocation_description());
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
+		sm.getMap().setCenter(new LatLng(siteToDisplay.getLatitude(), siteToDisplay.getLongitude()));
+		sm.getMap().setZoom(14.0);
 	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		JList<Marker> list = (JList<Marker>) e.getSource();
-		Marker selectedMarker = list.getSelectedValue();
 		
-		displayInfo(selectedMarker);
+		if(changesSaved) {
+			JList<String> list = (JList<String>) e.getSource();
+			selectedMarker = list.getSelectedValue();
+			
+			displayInfo(selectedMarker);
+			
+		}
+		else {
+			JOptionPane.showMessageDialog(appView, "Save your changes before selecting another site");
+		}
 	}
 	
 	

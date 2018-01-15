@@ -66,8 +66,8 @@ public class Database {
 			
 			while(!eof) {
 				CollectionSite site = (CollectionSite) inputStream.readObject();
-				entries.add(site);				
-			}
+				entries.add(site);	
+				}
 			
 			inputStream.close();
 			fInput.close();
@@ -97,7 +97,7 @@ public class Database {
 	 * @param name The name of the CollectionSite
 	 * @return A reference to a CollectionSite specified by name
 	 */
-	public CollectionSite getSite(String name) {
+	public CollectionSite getSiteByName(String name) {
 		for(int i = 0; i < entries.size(); i++) {
 			if(name.equals(entries.get(i).getName()))
 				return entries.get(i);

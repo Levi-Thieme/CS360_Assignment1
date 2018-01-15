@@ -14,21 +14,26 @@ import com.teamdev.jxmaps.Marker;
  */
 public class CollectionSite implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 999L;
 	private int ID;
 	private String name;
 	private String location_description;
 	private double latitude, longitude;
 	private ArrayList<String> collectionHistory;
-	Date updated = new Date();
+	private String updated;
 	
-	public CollectionSite(int id, String n, String location_description, double lat, double longitude) {
+	public CollectionSite(int id, String name, String location_description, double latitude, double longitude) {
 		
 		ID = id;
-		name = n;
+		this.name = name;
 		this.location_description = location_description;
-		latitude = lat;
+		this.latitude = latitude;
 		this.longitude = longitude;
 		collectionHistory = new ArrayList<String>();
+		updated = "";
 
 	}
 	
@@ -92,11 +97,11 @@ public class CollectionSite implements Serializable{
 		this.longitude = longitude;
 	}
 
-	public Date getUpdated() {
+	public String getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
+	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
 
