@@ -118,6 +118,10 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			
 			
 		}
+		if(arg0.getActionCommand().equals("Add Site")) {
+			
+		}
+		
 		else if(arg0.getActionCommand().equals("Edit")) {
 			appView.getNameField().setEditable(true);
 			appView.getNumField().setEditable(true);
@@ -129,8 +133,8 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		
 			
 			//Convert "Edit" button to "Save Changes" button
-			JButton button = (JButton) arg0.getSource();
-			button.setText("Save Changes");
+			JButton editBtn = (JButton)arg0.getSource();
+			editBtn.setText("Save Changes");
 			
 			changesSaved = false;
 		}
@@ -154,6 +158,7 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			changesSaved = true;
 		}
 	}
+
 	
 	
 	/**
@@ -195,6 +200,14 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		appView.getLongField().setText(String.valueOf(siteToDisplay.getLongitude()));
 		appView.getLatField().setText(String.valueOf(siteToDisplay.getLatitude())); 
 		
+		
+		appView.getUpdatedField().setText(siteToDisplay.getUpdated().toString());
+		appView.getDescriptionPane().setText(siteToDisplay.getLocation_description());
+	}
+
+
+
+	public void displayInfo(CollectionSite siteToDisplay) {
 		Date updated = siteToDisplay.getUpdated();
 		if(updated != null)
 			appView.getUpdatedField().setText("");

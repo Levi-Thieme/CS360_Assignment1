@@ -51,6 +51,8 @@ public class CollectionSite implements Serializable{
 		collectionHistory.add(updatedOn);
 	}
  	
+
+
 	public ArrayList<Date> getCollectionHistory() {
 		return collectionHistory;
 	}
@@ -58,6 +60,7 @@ public class CollectionSite implements Serializable{
 	public void setCollectionHistory(ArrayList<Date> collectionHistory) {
 		this.collectionHistory = collectionHistory;
 	}
+
 
 
 	
@@ -132,6 +135,8 @@ public class CollectionSite implements Serializable{
 		this.updatedBy = updatedBy;
 	}
 	
+
+
 	public void getHistory() {
 		
 		for(int i= 0; i<collectionHistory.size();i++) {
