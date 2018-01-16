@@ -9,10 +9,9 @@ public class CollectionSite {
 	private String name;
 	private String location_description;
 	private double latitude, longitude;
-<<<<<<< HEAD
+
 	private ArrayList<String> collectionHistory;
  	
-=======
 	Date updated = new Date();
 	
 	public int getID() {
@@ -63,7 +62,6 @@ public class CollectionSite {
 		this.updated = updated;
 	}
 
->>>>>>> branch 'master' of https://github.com/Levi-Thieme/CS360_Assignment1.git
 	public CollectionSite(int id, String n, String location_description, double lat, double longitude) {
 		
 		ID = id;

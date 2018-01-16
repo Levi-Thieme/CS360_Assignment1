@@ -10,14 +10,13 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
-<<<<<<< HEAD
+
 import models.CollectionSite;
-=======
+
 import com.teamdev.jxmaps.Marker;
 
 import models.CollectionSite;
 import models.Database;
->>>>>>> branch 'master' of https://github.com/Levi-Thieme/CS360_Assignment1.git
 import models.SiteMap;
 import views.ApplicationFrame;
 
@@ -69,13 +68,6 @@ public class ApplicationController implements MouseListener, ActionListener{
 		}
 		if(arg0.getActionCommand().equals("Add Site")) {
 			
-			CollectionSite s1 = new CollectionSite(0, null, null, 0, 0);
-			CollectionSite s2 = new CollectionSite(0, null, null, 0, 0);
-			s1.addDate(13, "January", 2018);
-			s2.addDate(14, "January", 2018);
-			s1.getHistory();
-			System.out.println("-----------------------");
-			s2.getHistory();
 		}
 		if(arg0.getActionCommand().equals("Edit")) {
 			appView.getNameField().setEditable(true);
@@ -101,9 +93,6 @@ public class ApplicationController implements MouseListener, ActionListener{
 			displayInfo((Marker) e.getSource());
 		}
 	}
-<<<<<<< HEAD
-	
-=======
 
 	/**
 	 * Display the corresponding site's info to the info panel
@@ -124,7 +113,7 @@ public class ApplicationController implements MouseListener, ActionListener{
 	}
 
 
->>>>>>> branch 'master' of https://github.com/Levi-Thieme/CS360_Assignment1.git
+
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
