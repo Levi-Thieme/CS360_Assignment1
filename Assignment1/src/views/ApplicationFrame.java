@@ -3,7 +3,9 @@ package views;
 import javax.swing.*;
 
 import com.teamdev.jxmaps.Map;
+import com.teamdev.jxmaps.Marker;
 
+import models.CollectionSite;
 import models.SiteMap;
 
 import java.awt.*;
@@ -25,16 +27,19 @@ public class ApplicationFrame extends JFrame {
 	private JMenuItem mntmAddSite;
 	private JButton btnEdit;
 	private JButton btnDelete;
-	private JTextField nameField;
 	private JTextPane descriptionTextPane;
+	private JTextField nameField;
+	private JList<String> markerList;
 	
-	public ApplicationFrame(SiteMap map) {
-		setSize(new Dimension(1000, 800));
+	public ApplicationFrame(SiteMap map, DefaultListModel<String> listModel) {
+		getContentPane().setPreferredSize(new Dimension(1000, 800));
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		//this.setUndecorated(true);
+		
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		this.setUndecorated(true);
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -44,16 +49,22 @@ public class ApplicationFrame extends JFrame {
 		menuBar.add(mnFile);
 		
 		mntmSave = new JMenuItem("Save");
+		mntmSave.setMnemonic(KeyEvent.VK_S);
 		mnFile.add(mntmSave);
+		
+		JMenuItem mntmUpload = new JMenuItem("Upload");
+		mnFile.add(mntmUpload);
 		
 		mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic(KeyEvent.VK_E);
 		mnFile.add(mntmExit);
 		
 		JMenu mnEdit = new JMenu("Edit");
+		mnEdit.setMnemonic(KeyEvent.VK_E);
 		menuBar.add(mnEdit);
 		
 		mntmAddSite = new JMenuItem("Add Site");
+		mntmAddSite.setMnemonic(KeyEvent.VK_A);
 		mnEdit.add(mntmAddSite);
 		
 				
@@ -62,6 +73,25 @@ public class ApplicationFrame extends JFrame {
 		panel.setPreferredSize(new Dimension(200, 10));
 		getContentPane().add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setPreferredSize(new Dimension(10, 230));
+		panel.add(panel_2, BorderLayout.NORTH);
+		
+		markerList = new JList<String>(listModel);
+		markerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JScrollPane scrollPane = new JScrollPane(markerList);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setPreferredSize(new Dimension(200, 150));
+		panel_2.add(scrollPane);
+		
+		JLabel label = new JLabel("Sites");
+		scrollPane.setColumnHeaderView(label);
+		
+		
+		
+		
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setPreferredSize(new Dimension(10, 75));
@@ -75,21 +105,17 @@ public class ApplicationFrame extends JFrame {
 		btnDelete.setPreferredSize(new Dimension(80, 80));
 		panel_1.add(btnDelete);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setPreferredSize(new Dimension(10, 60));
-		panel.add(panel_2, BorderLayout.NORTH);
+		JPanel panel_3 = new JPanel();
+		panel_3.setPreferredSize(new Dimension(10, 300));
+		panel.add(panel_3, BorderLayout.CENTER);
 		
-		JLabel lblSiteName = new JLabel("Site Name: ");
-		lblSiteName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSiteName.setPreferredSize(new Dimension(100, 50));
-		panel_2.add(lblSiteName);
+		JLabel lblName = new JLabel("Name:");
+		panel_3.add(lblName);
 		
 		nameField = new JTextField();
-		panel_2.add(nameField);
+		nameField.setEditable(false);
+		panel_3.add(nameField);
 		nameField.setColumns(10);
-		
-		JPanel panel_3 = new JPanel();
-		panel.add(panel_3, BorderLayout.CENTER);
 		
 		JLabel lblId = new JLabel("Number: ");
 		panel_3.add(lblId);
@@ -98,10 +124,6 @@ public class ApplicationFrame extends JFrame {
 		panel_3.add(numberField);
 		numberField.setColumns(10);
 		numberField.setEditable(false);
-		
-		JSeparator separator = new JSeparator();
-		separator.setPreferredSize(new Dimension(25, 2));
-		panel_3.add(separator);
 		
 		JLabel lblNewLabel = new JLabel("Longitude:");
 		lblNewLabel.setPreferredSize(new Dimension(60, 14));
@@ -112,10 +134,6 @@ public class ApplicationFrame extends JFrame {
 		longField.setColumns(10);
 		longField.setEditable(false);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setPreferredSize(new Dimension(20, 2));
-		panel_3.add(separator_1);
-		
 		JLabel lblLatitude = new JLabel("Latitude:");
 		panel_3.add(lblLatitude);
 		
@@ -123,10 +141,6 @@ public class ApplicationFrame extends JFrame {
 		panel_3.add(latField);
 		latField.setColumns(10);
 		latField.setEditable(false);
-		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setPreferredSize(new Dimension(30, 2));
-		panel_3.add(separator_2);
 		
 		JLabel lblUpdated = new JLabel("Updated:");
 		panel_3.add(lblUpdated);
@@ -136,22 +150,20 @@ public class ApplicationFrame extends JFrame {
 		updatedField.setColumns(10);
 		updatedField.setEditable(false);
 		
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setPreferredSize(new Dimension(40, 2));
-		panel_3.add(separator_3);
-		
 		JLabel lblDescription = new JLabel("Description");
 		panel_3.add(lblDescription);
 		
 		descriptionTextPane = new JTextPane();
+		descriptionTextPane.setEditable(false);
 		descriptionTextPane.setPreferredSize(new Dimension(200, 300));
 		panel_3.add(descriptionTextPane);
+		
+		
 		
 		getContentPane().add(map, BorderLayout.CENTER);
 		
 		JPanel mapPane = new JPanel();
 		mapPane.setPreferredSize(new Dimension(770, 10));
-		
 		
 		
 		JPanel map_panel = new JPanel();
@@ -168,14 +180,12 @@ public class ApplicationFrame extends JFrame {
 		map_panel.add(panel_4, BorderLayout.NORTH);
 		
 		
-		
-		
-		
-		this.setVisible(true);
-		
-		
-		
+		this.pack();
+		this.setVisible(true);	
 	}
+	
+	
+	
 	
 	public JMenuItem getMntmSave() {
 		return mntmSave;
@@ -209,6 +219,13 @@ public class ApplicationFrame extends JFrame {
 	}
 	public JTextPane getDescriptionPane() {
 		return descriptionTextPane;
+	}
+
+
+
+
+	public JList<String> getMarkerList() {
+		return markerList;
 	}
 }
 
