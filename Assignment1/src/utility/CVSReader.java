@@ -38,9 +38,6 @@ public class CVSReader {
 					String[] attributes = line.split(",");
 					
 					
-					for(int i = 0; i < attributes.length; i++)
-						System.out.println(attributes[i]); 
-					
 					CollectionSite site = createSite(attributes);
 					
 					sites.add(site);

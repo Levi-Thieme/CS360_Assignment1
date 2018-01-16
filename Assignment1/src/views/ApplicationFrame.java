@@ -72,16 +72,21 @@ public class ApplicationFrame extends JFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setPreferredSize(new Dimension(10, 180));
+		panel_2.setPreferredSize(new Dimension(10, 230));
 		panel.add(panel_2, BorderLayout.NORTH);
 		
-		JLabel label = new JLabel("Sites");
-		panel_2.add(label);
-		
 		markerList = new JList<String>(listModel);
-		markerList.setPreferredSize(new Dimension(200, 200));
 		markerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		panel_2.add(markerList);
+		
+		JScrollPane scrollPane = new JScrollPane(markerList);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setPreferredSize(new Dimension(200, 150));
+		panel_2.add(scrollPane);
+		
+		JLabel label = new JLabel("Sites");
+		scrollPane.setColumnHeaderView(label);
+		
+		
 		
 		
 		
@@ -98,7 +103,7 @@ public class ApplicationFrame extends JFrame {
 		panel_1.add(btnDelete);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setPreferredSize(new Dimension(10, 350));
+		panel_3.setPreferredSize(new Dimension(10, 300));
 		panel.add(panel_3, BorderLayout.CENTER);
 		
 		JLabel lblName = new JLabel("Name:");
