@@ -21,7 +21,6 @@ public class ApplicationFrame extends JFrame {
 	private JTextField numberField;
 	private JTextField longField;
 	private JTextField latField;
-	private JTextField updatedField;
 	private JMenuItem mntmSave;
 	private JMenuItem mntmExit;
 	private JMenuItem mntmAddSite;
@@ -31,6 +30,13 @@ public class ApplicationFrame extends JFrame {
 	private JTextField nameField;
 	private JList<String> markerList;
 	private JTextField updatedByField;
+	private JTextField timeField;
+	
+
+
+
+
+	private JTextField dateField;
 	
 	public ApplicationFrame(SiteMap map, DefaultListModel<String> listModel) {
 		getContentPane().setPreferredSize(new Dimension(1000, 800));
@@ -139,33 +145,57 @@ public class ApplicationFrame extends JFrame {
 		panel_3.add(lblLatitude);
 		
 		latField = new JTextField();
+		latField.setPreferredSize(new Dimension(140, 20));
 		panel_3.add(latField);
 		latField.setColumns(10);
 		latField.setEditable(false);
-		
-		JLabel lblUpdated = new JLabel("Updated:");
-		panel_3.add(lblUpdated);
-		
-		updatedField = new JTextField();
-		panel_3.add(updatedField);
-		updatedField.setColumns(10);
-		updatedField.setEditable(false);
-		
-		JLabel lblTakenBy = new JLabel("Updated By:");
-		panel_3.add(lblTakenBy);
-		
-		updatedByField = new JTextField();
-		updatedByField.setEditable(false);
-		panel_3.add(updatedByField);
-		updatedByField.setColumns(10);
 		
 		JLabel lblDescription = new JLabel("Description");
 		panel_3.add(lblDescription);
 		
 		descriptionTextPane = new JTextPane();
 		descriptionTextPane.setEditable(false);
-		descriptionTextPane.setPreferredSize(new Dimension(200, 300));
+		descriptionTextPane.setPreferredSize(new Dimension(200, 200));
 		panel_3.add(descriptionTextPane);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setPreferredSize(new Dimension(50, 2));
+		panel_3.add(separator_1);
+		
+		JLabel lblUpdated = new JLabel("Updated");
+		lblUpdated.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panel_3.add(lblUpdated);
+		
+		JSeparator separator = new JSeparator();
+		separator.setPreferredSize(new Dimension(40, 2));
+		panel_3.add(separator);
+		
+		JLabel lblDate = new JLabel("Date:");
+		lblDate.setPreferredSize(new Dimension(80, 14));
+		panel_3.add(lblDate);
+		
+		dateField = new JTextField();
+		dateField.setEditable(false);
+		dateField.setColumns(10);
+		panel_3.add(dateField);
+		
+		JLabel lblTime = new JLabel("Time:");
+		lblTime.setPreferredSize(new Dimension(80, 14));
+		panel_3.add(lblTime);
+		
+		timeField = new JTextField();
+		timeField.setEditable(false);
+		panel_3.add(timeField);
+		timeField.setColumns(10);
+		
+		JLabel lblTakenBy = new JLabel("Updated By:");
+		lblTakenBy.setPreferredSize(new Dimension(80, 14));
+		panel_3.add(lblTakenBy);
+		
+		updatedByField = new JTextField();
+		updatedByField.setEditable(false);
+		panel_3.add(updatedByField);
+		updatedByField.setColumns(10);
 		
 		
 		
@@ -223,12 +253,27 @@ public class ApplicationFrame extends JFrame {
 	public JTextField getLatField() {
 		return latField;
 	}
-	public JTextField getUpdatedField() {
-		return updatedField;
+	public JTextField dateField() {
+		return dateField;
 	}
 	public JTextField getUpdatedByField() {
 		return updatedByField;
 	}
+	public JTextField getDateField() {
+		return dateField;
+	}
+	public void setDateField(JTextField dateField) {
+		this.dateField = dateField;
+	}
+
+
+	public JTextField getTimeField() {
+		return timeField;
+	}
+	public void setTimeField(JTextField timeField) {
+		this.timeField = timeField;
+	}
+
 	public JTextPane getDescriptionPane() {
 		return descriptionTextPane;
 	}

@@ -127,7 +127,8 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			appView.getNumField().setEditable(true);
 			appView.getLongField().setEditable(true);
 			appView.getLatField().setEditable(true);
-			appView.getUpdatedField().setEditable(true);
+			appView.getDateField().setEditable(true);
+			appView.getTimeField().setEditable(true);
 			appView.getUpdatedByField().setEditable(true);
 			appView.getDescriptionPane().setEditable(true);
 		
@@ -151,7 +152,8 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			appView.getNumField().setEditable(false);
 			appView.getLongField().setEditable(false);
 			appView.getLatField().setEditable(false);
-			appView.getUpdatedField().setEditable(false);
+			appView.getDateField().setEditable(false);
+			appView.getTimeField().setEditable(false);
 			appView.getUpdatedByField().setEditable(false);
 			appView.getDescriptionPane().setEditable(false);
 			
@@ -172,9 +174,13 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		changedSite.setNum(appView.getNumField().getText());
 		changedSite.setLatitude(Double.parseDouble(appView.getLatField().getText()));
 		changedSite.setLongitude(Double.parseDouble(appView.getLongField().getText()));
-		changedSite.setUpdated(appView.getUpdatedField().getText());
-		changedSite.setUpdatedBy(appView.getUpdatedByField().getText());
 		changedSite.setLocation_description(appView.getDescriptionPane().getText());
+		
+		changedSite.setUpdated(appView.dateField().getText());
+		changedSite.setTime(appView.getTimeField().getText());
+		changedSite.setUpdatedBy(appView.getUpdatedByField().getText());
+		
+		
 		
 	}
 
@@ -192,7 +198,7 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		if(siteToDisplay == null)
 			return;
 		
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("M-d-y 'at' h:m:s a z");
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("M-d-y");
 		
 		
 		appView.getNameField().setText(siteToDisplay.getName());
@@ -200,24 +206,18 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		appView.getLongField().setText(String.valueOf(siteToDisplay.getLongitude()));
 		appView.getLatField().setText(String.valueOf(siteToDisplay.getLatitude())); 
 		
+		if(siteToDisplay.getUpdated() == null)
+			appView.dateField().setText("");
+		else
+			appView.dateField().setText(dateFormatter.format(siteToDisplay.getUpdated()));
 		
-		appView.getUpdatedField().setText(siteToDisplay.getUpdated().toString());
-		appView.getDescriptionPane().setText(siteToDisplay.getLocation_description());
-	}
-
-
-
-	public void displayInfo(CollectionSite siteToDisplay) {
-		Date updated = siteToDisplay.getUpdated();
-		if(updated != null)
-			appView.getUpdatedField().setText("");
-		
-		
+		appView.getTimeField().setText(siteToDisplay.getTime());
 		appView.getUpdatedByField().setText(siteToDisplay.getUpdatedBy());
 		appView.getDescriptionPane().setText(siteToDisplay.getLocation_description());
-		sm.getMap().setCenter(new LatLng(siteToDisplay.getLatitude(), siteToDisplay.getLongitude()));
-		sm.getMap().setZoom(14.0);
 	}
+
+
+
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {

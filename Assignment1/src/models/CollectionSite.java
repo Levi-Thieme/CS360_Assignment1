@@ -25,6 +25,7 @@ public class CollectionSite implements Serializable{
 	private double latitude, longitude;
 	private ArrayList<Date> collectionHistory;
 	private Date updated;
+	private String time;
 	private String updatedBy;
 	
 	
@@ -38,13 +39,11 @@ public class CollectionSite implements Serializable{
 		this.longitude = longitude;
 		collectionHistory = new ArrayList<Date>();
 		updated = null;
+		time = "";
 		updatedBy = "";
 
 	}
 	
-	public CollectionSite() {
-		
-	}
 	
 	public void addDate(Date updatedOn) {
 		
@@ -133,6 +132,15 @@ public class CollectionSite implements Serializable{
 
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
+	}
+	
+	public String getTime() {
+		return time;
+	}
+
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 	
 
