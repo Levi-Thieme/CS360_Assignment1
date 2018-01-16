@@ -109,21 +109,23 @@ public class CollectionSite implements Serializable{
 
 	public void setUpdated(String updated) {
 		
-		if(updated.equals(this.updated)) //If no change has occurred in update field, return
-			return;
+		
 		
 		DateFormat shortDF = DateFormat.getDateInstance(DateFormat.SHORT);
 		
 		try {
 			Date date = shortDF.parse(updated);
+			
+			
+			if(date.equals(this.updated))
+				return;
+			
+			
 			collectionHistory.add(date);
 			this.updated = date;
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Improper date format. Enter the date in the format MM/DD/YYYY");
 		}
-			
-		
-		
 	}
 	
 	public String getUpdatedBy() {

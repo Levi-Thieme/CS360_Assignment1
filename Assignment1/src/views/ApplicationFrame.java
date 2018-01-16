@@ -31,12 +31,8 @@ public class ApplicationFrame extends JFrame {
 	private JList<String> markerList;
 	private JTextField updatedByField;
 	private JTextField timeField;
-	
-
-
-
-
 	private JTextField dateField;
+	private JButton btnViewHistory;
 	
 	public ApplicationFrame(SiteMap map, DefaultListModel<String> listModel) {
 		getContentPane().setPreferredSize(new Dimension(1000, 800));
@@ -197,6 +193,9 @@ public class ApplicationFrame extends JFrame {
 		panel_3.add(updatedByField);
 		updatedByField.setColumns(10);
 		
+		btnViewHistory = new JButton("View Update History");
+		panel_3.add(btnViewHistory);
+		
 		
 		
 		getContentPane().add(map, BorderLayout.CENTER);
@@ -273,6 +272,20 @@ public class ApplicationFrame extends JFrame {
 	public void setTimeField(JTextField timeField) {
 		this.timeField = timeField;
 	}
+
+	public JButton getBtnViewHistory() {
+		return btnViewHistory;
+	}
+
+
+
+
+	public void setBtnViewHistory(JButton btnViewHistory) {
+		this.btnViewHistory = btnViewHistory;
+	}
+
+
+
 
 	public JTextPane getDescriptionPane() {
 		return descriptionTextPane;

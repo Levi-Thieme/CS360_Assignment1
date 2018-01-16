@@ -60,7 +60,7 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		appView.getMntmSave().addActionListener(this);
 		appView.getBtnEdit().addActionListener(this);
 		appView.getBtnDelete().addActionListener(this);
-		
+		appView.getBtnViewHistory().addActionListener(this);
 		appView.getMarkerList().addListSelectionListener(this);
 	}
 	
@@ -118,10 +118,6 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			
 			
 		}
-		if(arg0.getActionCommand().equals("Add Site")) {
-			
-		}
-		
 		else if(arg0.getActionCommand().equals("Edit")) {
 			appView.getNameField().setEditable(true);
 			appView.getNumField().setEditable(true);
@@ -159,6 +155,26 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			
 			changesSaved = true;
 		}
+		else if(arg0.getActionCommand().equals("View Update History")) {
+			JFrame historyFrame = new JFrame();
+			historyFrame.setSize(new Dimension(600, 500));
+			
+			JTextPane historyPane = new JTextPane();
+			historyFrame.add(historyPane);
+			
+			CollectionSite selectedSite = siteDB.getSiteByName(selectedMarker);
+			
+			String updateHistory = "";
+			SimpleDateFormat dateFormatter = new SimpleDateFormat("M-d-y");
+			
+			for(int i = 0; i < selectedSite.getCollectionHistory().size(); i++) {
+				updateHistory = dateFormatter.format(selectedSite.getCollectionHistory().get(i)) + "\n" + updateHistory;
+			}
+			
+			historyPane.setText(updateHistory);
+			
+			historyFrame.setVisible(true);
+		}
 	}
 
 	
@@ -192,11 +208,13 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 	private void displayInfo(String name) {
 		CollectionSite siteToDisplay = siteDB.getSiteByName(name);
 		
-		appView.getNameField().setText(name);
+		
 
 		
 		if(siteToDisplay == null)
 			return;
+		
+		appView.getNameField().setText(name);
 		
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("M-d-y");
 		
@@ -214,6 +232,9 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		appView.getTimeField().setText(siteToDisplay.getTime());
 		appView.getUpdatedByField().setText(siteToDisplay.getUpdatedBy());
 		appView.getDescriptionPane().setText(siteToDisplay.getLocation_description());
+		
+		sm.getMap().setCenter(new LatLng(siteToDisplay.getLatitude(), siteToDisplay.getLongitude()));
+		sm.getMap().setZoom(14.0);
 	}
 
 
