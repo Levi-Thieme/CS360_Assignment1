@@ -1,8 +1,12 @@
 package models;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.swing.JOptionPane;
 
 import com.teamdev.jxmaps.Marker;
 
@@ -14,26 +18,27 @@ import com.teamdev.jxmaps.Marker;
  */
 public class CollectionSite implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 999L;
-	private int ID;
+	private String num;
 	private String name;
 	private String location_description;
 	private double latitude, longitude;
-	private ArrayList<String> collectionHistory;
-	private String updated;
+	private ArrayList<Date> collectionHistory;
+	private Date updated;
+	private String updatedBy;
 	
-	public CollectionSite(int id, String name, String location_description, double latitude, double longitude) {
+	
+
+	public CollectionSite(String num, String name, String location_description, double latitude, double longitude) {
 		
-		ID = id;
+		this.num = num;
 		this.name = name;
 		this.location_description = location_description;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		collectionHistory = new ArrayList<String>();
-		updated = "";
+		collectionHistory = new ArrayList<Date>();
+		updated = null;
+		updatedBy = "";
 
 	}
 	
@@ -41,28 +46,27 @@ public class CollectionSite implements Serializable{
 		
 	}
 	
-	public void addDate(int day, String month, int year) {
+	public void addDate(Date updatedOn) {
 		
-		String newDate = month + " " + day + ", " + year; 
-		collectionHistory.add(newDate);
+		collectionHistory.add(updatedOn);
 	}
  	
-	public ArrayList<String> getCollectionHistory() {
+	public ArrayList<Date> getCollectionHistory() {
 		return collectionHistory;
 	}
 
-	public void setCollectionHistory(ArrayList<String> collectionHistory) {
+	public void setCollectionHistory(ArrayList<Date> collectionHistory) {
 		this.collectionHistory = collectionHistory;
 	}
 
 
 	
-	public int getID() {
-		return ID;
+	public String getNum() {
+		return num;
 	}
 
-	public void setID(String iD) {
-		this.ID = ID;
+	public void setNum(String num) {
+		this.num = num;
 	}
 
 	public String getName() {
@@ -97,14 +101,36 @@ public class CollectionSite implements Serializable{
 		this.longitude = longitude;
 	}
 
-	public String getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(String updated) {
-		this.updated = updated;
+		
+		if(updated.equals(this.updated)) //If no change has occurred in update field, return
+			return;
+		
+		DateFormat shortDF = DateFormat.getDateInstance(DateFormat.SHORT);
+		
+		try {
+			Date date = shortDF.parse(updated);
+			collectionHistory.add(date);
+			this.updated = date;
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(null, "Improper date format. Enter the date in the format MM/DD/YYYY");
+		}
+			
+		
+		
+	}
+	
+	public String getUpdatedBy() {
+		return updatedBy;
 	}
 
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
 	
 	public void getHistory() {
 		

@@ -93,7 +93,7 @@ public class CVSReader {
 	}
 	
 	private static CollectionSite createSite(String[] data) {
-		int num = Integer.parseInt(data[0]);
+		String num = data[0];
 		double longitude = Double.parseDouble(data[1]);
 		double latitude = Double.parseDouble(data[2]);
 		String description = data[3];

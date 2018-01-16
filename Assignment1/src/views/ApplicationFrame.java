@@ -30,6 +30,7 @@ public class ApplicationFrame extends JFrame {
 	private JTextPane descriptionTextPane;
 	private JTextField nameField;
 	private JList<String> markerList;
+	private JTextField updatedByField;
 	
 	public ApplicationFrame(SiteMap map, DefaultListModel<String> listModel) {
 		getContentPane().setPreferredSize(new Dimension(1000, 800));
@@ -150,6 +151,14 @@ public class ApplicationFrame extends JFrame {
 		updatedField.setColumns(10);
 		updatedField.setEditable(false);
 		
+		JLabel lblTakenBy = new JLabel("Updated By:");
+		panel_3.add(lblTakenBy);
+		
+		updatedByField = new JTextField();
+		updatedByField.setEditable(false);
+		panel_3.add(updatedByField);
+		updatedByField.setColumns(10);
+		
 		JLabel lblDescription = new JLabel("Description");
 		panel_3.add(lblDescription);
 		
@@ -176,7 +185,7 @@ public class ApplicationFrame extends JFrame {
 		map_panel.add(map);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setPreferredSize(new Dimension(10, 50));
+		panel_4.setPreferredSize(new Dimension(10, 70));
 		map_panel.add(panel_4, BorderLayout.NORTH);
 		
 		
@@ -216,6 +225,9 @@ public class ApplicationFrame extends JFrame {
 	}
 	public JTextField getUpdatedField() {
 		return updatedField;
+	}
+	public JTextField getUpdatedByField() {
+		return updatedByField;
 	}
 	public JTextPane getDescriptionPane() {
 		return descriptionTextPane;
