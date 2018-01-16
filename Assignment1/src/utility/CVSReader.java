@@ -16,7 +16,7 @@ import models.CollectionSite;
 
 public class CVSReader {
 	
-	public static ArrayList<CollectionSite> readCollectionSites() {
+	public static ArrayList<CollectionSite> readCollectionSitesFromFile() {
 		
 		ArrayList<CollectionSite> sites = new ArrayList<CollectionSite>();
 		
@@ -56,6 +56,40 @@ public class CVSReader {
 		
 		
 		return sites;
+	}
+	
+	public static ArrayList<CollectionSite> readInitialSites() {
+		
+		ArrayList<CollectionSite> sites = new ArrayList<CollectionSite>();
+		File file = new File("sample-sites.csv");
+			
+			try {
+				FileReader fr = new FileReader(file);
+				BufferedReader br = new BufferedReader(fr);
+				
+				String line = br.readLine();
+			
+				
+				while((line = br.readLine()) != null) {
+					String[] attributes = line.split(",");
+					
+					
+					CollectionSite site = createSite(attributes);
+					
+					sites.add(site);
+					
+					
+				
+				}
+				
+				fr.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		
+			return sites;
 	}
 	
 	private static CollectionSite createSite(String[] data) {

@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -25,6 +26,7 @@ import com.teamdev.jxmaps.Marker;
 import models.CollectionSite;
 import models.Database;
 import models.SiteMap;
+import utility.CVSReader;
 import views.ApplicationFrame;
 
 public class ApplicationController implements ActionListener, ListSelectionListener{
@@ -64,6 +66,15 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		
+		
+		if(arg0.getActionCommand().equals("Upload")) {
+			ArrayList<CollectionSite> uploadedSites = CVSReader.readCollectionSitesFromFile();
+			
+			for(int i = 0; i < uploadedSites.size(); i++)
+				siteDB.addSite(uploadedSites.get(i));
+			
+		}
 		/*
 		 * Need to handle all of the ApplicationFrame's menuItems and buttons in this
 		 */
@@ -100,11 +111,11 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			}
 
 		}
-		if(arg0.getActionCommand().equals("Add Site")) {
-			
+		else if(arg0.getActionCommand().equals("Add Site")) {
+			//get user input, create the collectionsite, update database, update view
 			
 		}
-		if(arg0.getActionCommand().equals("Edit")) {
+		else if(arg0.getActionCommand().equals("Edit")) {
 			appView.getNameField().setEditable(true);
 			appView.getNumField().setEditable(true);
 			appView.getLongField().setEditable(true);
@@ -119,12 +130,21 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 			changesSaved = false;
 		}
 		
-		if(arg0.getActionCommand().equals("Save Changes")) {
+		else if(arg0.getActionCommand().equals("Save Changes")) {
 			//Convert "Save Changes" button to "Edit" button
 			JButton editBtn = (JButton)arg0.getSource();
 			editBtn.setText("Edit");
 			
 			saveTextFieldChanges();
+			
+			
+			appView.getNameField().setEditable(false);
+			appView.getNumField().setEditable(false);
+			appView.getLongField().setEditable(false);
+			appView.getLatField().setEditable(false);
+			appView.getUpdatedField().setEditable(false);
+			appView.getDescriptionPane().setEditable(false);
+			
 			changesSaved = true;
 		}
 	}

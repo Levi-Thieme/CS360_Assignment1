@@ -2,11 +2,16 @@ package models;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import utility.CVSReader;
 
 /**
  * The Database Class stores the CollectionSite Objects and
@@ -27,9 +32,42 @@ public class Database {
 		this.filename = filename;
 		entries = new ArrayList<CollectionSite>();
 		
-		//load();
+		load();
 	}
 	
+	/**
+	 * Adds a site to the entries list
+	 * @param siteToAdd The CollectionSite to be added
+	 */
+	public void addSite(CollectionSite siteToAdd) {
+		
+		//Handle duplicate sites
+		CollectionSite existingSite = getSiteByName(siteToAdd.getName());
+		
+		if(existingSite  != null) {
+			String ObjButtons[] = {"Yes", "No"};
+			int promptResult;
+			
+			promptResult = JOptionPane.showOptionDialog(null, "The following site: " + siteToAdd.getName() + " already exists. Would you like to overwrite it?",
+					null, JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
+			
+			if(promptResult == JOptionPane.YES_OPTION) {
+				int index = -1;
+				for(index = 0; index < entries.size(); index++) {
+					if(entries.get(index).getName().equals(existingSite.getName()))
+						break;
+				}
+				
+				entries.remove(index);
+				entries.add(siteToAdd);
+			}
+			else {
+				return;
+			}
+		}
+		
+		entries.add(siteToAdd);
+	}
 	
 	
 	/**
@@ -75,12 +113,28 @@ public class Database {
 			
 		} catch(EOFException e) {
 			eof = true;
-			return;
+		}
+		catch(FileNotFoundException e) {
+			entries = CVSReader.readInitialSites();
 		}
 		catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Returns a reference to a CollectionSite
+	 * @param name The name of the CollectionSite
+	 * @return A reference to a CollectionSite specified by name
+	 */
+	public CollectionSite getSiteByName(String name) {
+		for(int i = 0; i < entries.size(); i++) {
+			if(name.equals(entries.get(i).getName()))
+				return entries.get(i);
+		}
+		return null;
+	}
+	
 	
 	
 	/**
@@ -96,18 +150,6 @@ public class Database {
 	}
 	
 	
-	/**
-	 * Returns a reference to a CollectionSite
-	 * @param name The name of the CollectionSite
-	 * @return A reference to a CollectionSite specified by name
-	 */
-	public CollectionSite getSiteByName(String name) {
-		for(int i = 0; i < entries.size(); i++) {
-			if(name.equals(entries.get(i).getName()))
-				return entries.get(i);
-		}
-		return null;
-	}
 	
 	
 	

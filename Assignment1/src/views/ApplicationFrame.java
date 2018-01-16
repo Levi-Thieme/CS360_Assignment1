@@ -52,6 +52,9 @@ public class ApplicationFrame extends JFrame {
 		mntmSave.setMnemonic(KeyEvent.VK_S);
 		mnFile.add(mntmSave);
 		
+		JMenuItem mntmUpload = new JMenuItem("Upload");
+		mnFile.add(mntmUpload);
+		
 		mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic(KeyEvent.VK_E);
 		mnFile.add(mntmExit);
@@ -151,6 +154,7 @@ public class ApplicationFrame extends JFrame {
 		panel_3.add(lblDescription);
 		
 		descriptionTextPane = new JTextPane();
+		descriptionTextPane.setEditable(false);
 		descriptionTextPane.setPreferredSize(new Dimension(200, 300));
 		panel_3.add(descriptionTextPane);
 		

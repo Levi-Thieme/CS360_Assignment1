@@ -16,12 +16,11 @@ import utility.DataFileInitializer;
 import views.ApplicationFrame;
 
 public class Driver {
+	private static final String defaultSaveLoadFile = "entries";
 	
 	public static void main(String[] args) throws IOException {
-		Database siteDB = new Database("entries");
-		
-		siteDB.setEntries(CVSReader.readCollectionSites());
-			
+		Database siteDB = new Database(defaultSaveLoadFile);
+					
 		ApplicationController controller = new ApplicationController(siteDB);
         
 	}
