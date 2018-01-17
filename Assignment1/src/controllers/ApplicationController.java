@@ -49,11 +49,13 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 		for(int i = 0; i < sites.size(); i++)
 			siteListModel.addElement(sites.get(i).getName());
 		
+		
+		
 		sm = new SiteMap(sites);
 		
 		
  		appView = new ApplicationFrame(sm, siteListModel);
-
+ 		
 		
 		appView.getMntmAddSite().addActionListener(this);
 		appView.getMntmExit().addActionListener(this);
@@ -114,9 +116,25 @@ public class ApplicationController implements ActionListener, ListSelectionListe
 
 		}
 		else if(arg0.getActionCommand().equals("Add Site")) {
-			//get user input, create the collectionsite, update database, update view
+			//get user input, create the collectionsite, update database, update view public CollectionSite(String num, String name, String location_description, double latitude, double longitude)
+			String name = JOptionPane.showInputDialog("Enter the name of the site.");
+			String num =  JOptionPane.showInputDialog("Enter the number of the site.");
+			String location =  JOptionPane.showInputDialog("Enter a description of the site.");
+			double latitude =  Double.parseDouble(JOptionPane.showInputDialog("Enter the latitude of the site."));
+			double longitude =  Double.parseDouble(JOptionPane.showInputDialog("Enter the longitude of the site."));
 			
+			CollectionSite newSite = new CollectionSite(num, name, location, latitude, longitude);
+			siteDB.addSite(newSite);
+			siteListModel.addElement(newSite.getName());
 			
+			Marker marker = new Marker(sm.getMap());
+			marker.setTitle(name);
+			marker.setPosition(new LatLng(latitude, longitude));
+			
+			sm.getMarkers().add(marker);
+			
+			sm.getMap().setCenter(new LatLng(latitude, longitude));
+			sm.getMap().setZoom(14.0);
 		}
 		else if(arg0.getActionCommand().equals("Edit")) {
 			appView.getNameField().setEditable(true);
